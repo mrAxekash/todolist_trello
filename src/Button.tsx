@@ -5,10 +5,10 @@ type ButtonProps = {
     className?: string
     onClick: () => void
 };
-export const Button = (props: ButtonProps) => {
+export const Button = ({onClick, title, className}: ButtonProps) => {
     return (
-        <button className={props.className} onClick={props.onClick}>
-            {props.title}
+        <button className={className} onClick={onClick}>
+            {title}
         </button>
     );
 };
