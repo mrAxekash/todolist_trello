@@ -5,11 +5,12 @@ import {useState, KeyboardEvent, ChangeEvent} from "react";
 import {Button} from "./Button";
 
 type PropsType = {
+    id: string
     title: string
     filter: FilterValueType
     tasks: Array<TaskType>
     removeTask: (id: string) => void
-    changeFilter: (newFilterValue: FilterValueType) => void
+    changeFilter: (newFilterValue: FilterValueType, todolistId: string) => void
     addTask: (taskName:string) => void
     changeTaskStatus: (taskId: string, newStatus: boolean) => void
 };
@@ -43,7 +44,7 @@ export const Todolist = (props: PropsType) => {
             setTaskName(e.currentTarget.value)
     }
     const changeFilterTaskHandler = (filteredValue: FilterValueType) => {
-        props.changeFilter(filteredValue)
+        props.changeFilter(filteredValue, props.id)
     }
 
     return (
