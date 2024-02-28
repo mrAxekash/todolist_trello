@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 export type FilterValueType = 'all' | 'active' | 'completed'
 
@@ -38,7 +39,6 @@ function App() {
         ]
     })
 
-
     // const [tasks, setTasks] = useState([
     //     {id: v1(), title: 'HTML & CSS', isDone: true},
     //     {id: v1(), title: 'JS', isDone: false},
@@ -46,9 +46,6 @@ function App() {
     //     {id: v1(), title: 'Redux', isDone: false},
     //     {id: v1(), title: 'Redux-toolkit', isDone: false},
     // ])
-
-
-
 
     const removeTask = (todolistId: string, taskId: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskId)})
@@ -77,9 +74,17 @@ function App() {
         setTasks({...tasks})
     }
 
+    const addTodolist = (title: string) => {
+        let todolistId = v1()
+        const newTodolist: TodolistType = {id: todolistId, title, filter: 'all' }
+        setTodolists([...todolists, newTodolist])
+        setTasks({...tasks, [todolistId]: [] })
+    }
+
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodolist}/>
             {todolists.map(todolist => {
                 let allTasksForTodolist = tasks[todolist.id]
                 let tasksForTodolist = allTasksForTodolist
