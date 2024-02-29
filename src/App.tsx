@@ -39,14 +39,6 @@ function App() {
         ]
     })
 
-    // const [tasks, setTasks] = useState([
-    //     {id: v1(), title: 'HTML & CSS', isDone: true},
-    //     {id: v1(), title: 'JS', isDone: false},
-    //     {id: v1(), title: 'ReactJS', isDone: false},
-    //     {id: v1(), title: 'Redux', isDone: false},
-    //     {id: v1(), title: 'Redux-toolkit', isDone: false},
-    // ])
-
     const removeTask = (todolistId: string, taskId: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskId)})
     }
@@ -68,6 +60,10 @@ function App() {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(task => task.id === taskId ? {...task, isDone: newStatus} : task)})
     }
 
+    const changeTaskTitle = (todolistID: string, taskID: string, newTitle: string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(task => task.id === taskID ? {...task, title: newTitle} : task)})
+    }
+
     const deleteTodolist = (todolistId: string) => {
         setTodolists(todolists.filter(todolist => todolist.id !== todolistId))
         delete tasks[todolistId]
@@ -80,6 +76,11 @@ function App() {
         setTodolists([...todolists, newTodolist])
         setTasks({...tasks, [todolistId]: [] })
     }
+
+    const changeTodolistTitle = (todolistID: string, newTitle: string) => {
+        setTodolists(todolists.map(todolist => todolist.id === todolistID ? {...todolist, title: newTitle} : todolist))
+    }
+
 
 
     return (
@@ -102,10 +103,12 @@ function App() {
                     filter={todolist.filter}
                     tasks={tasksForTodolist}
                     removeTask={removeTask}
+                    onChangeTaskTitle={changeTaskTitle}
                     changeFilter={changeFilter}
                     addTask={addTask}
                     changeTaskStatus={changeTaskStatus}
                     deleteTodolist={deleteTodolist}
+                    changeTodolistTitle={changeTodolistTitle}
                 />})}
 
         </div>
