@@ -28,6 +28,7 @@ function App() {
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
+
     let [tasks, setTasks] = useState<TasksFortodolistType>({
         [todolistID1]: [
             {id: v1(), title: 'HTML & CSS', isDone: true},
@@ -83,8 +84,6 @@ function App() {
     const changeTodolistTitle = (todolistID: string, newTitle: string) => {
         setTodolists(todolists.map(todolist => todolist.id === todolistID ? {...todolist, title: newTitle} : todolist))
     }
-
-
 
     return (
         <div className="App">
