@@ -7,13 +7,14 @@ type ActionType = {
     [key: string]: any
 }
 
-export const todolistsReducer = (state: TodolistType[], action: todolistReducerType): TodolistType[] => {
+const initialState:TodolistType[] = []
+export const todolistsReducer = (state= initialState, action: TodolistReducerType): TodolistType[] => {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
             return state.filter(todo => todo.id !== action.payload.todolistID)
         }
         case 'ADD-TODOLIST': {
-            const newTodolistID = v1()
+            const newTodolistID = action.payload.todolistId
             const newTodolist:TodolistType = {id: newTodolistID, title: action.payload.newName, filter: 'all'}
             return [...state, newTodolist]
         }
@@ -24,16 +25,16 @@ export const todolistsReducer = (state: TodolistType[], action: todolistReducerT
             return state.map(todo => todo.id === action.payload.todolistID ? {...todo, filter: action.payload.newFilterValue} : todo)
         }
         default: {
-            throw new Error('I don\'t understand this type')
+            return state
         }
 
     }
 }
 
-type todolistReducerType = removeTodolistACType | addTodolistACType | changeTodolistTitleACType | changeTodolistFilterACType
+export type TodolistReducerType = removeTodolistACType | addTodolistACType | changeTodolistTitleACType | changeTodolistFilterACType
 
 export type removeTodolistACType = ReturnType<typeof removeTodolostAC>
-export type addTodolistACType = ReturnType<typeof addTodolostAC>
+export type addTodolistACType = ReturnType<typeof addTodolistAC>
 export type changeTodolistTitleACType = ReturnType<typeof changeTodolistTitleAC>
 export type changeTodolistFilterACType =  ReturnType<typeof changeTodolistFilterAC>
 
@@ -46,11 +47,12 @@ export const removeTodolostAC = (todolistID: string) => {
     } as const
 }
 
-export const addTodolostAC = (newName: string) => {
+export const addTodolistAC = (newName: string) => {
     return {
         type: 'ADD-TODOLIST',
         payload: {
-            newName
+            newName,
+            todolistId: v1()
         }
     } as const
 }
