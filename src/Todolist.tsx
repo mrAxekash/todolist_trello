@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css'
 import {FilterValueType} from "./App";
-import {ChangeEvent} from "react";
+import {ChangeEvent, useCallback} from "react";
 
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
@@ -32,9 +32,9 @@ export const Todolist = (props: PropsType) => {
     const deleteTask = (taskId: string) => {
         props.removeTask(props.todolistID, taskId)
     }
-    const addTask = (title: string) => {
+    const addTask = useCallback((title: string) => {
         props.addTask(props.todolistID, title)
-    }
+    }, [])
 
     const changeFilterTaskHandler = (filteredValue: FilterValueType) => {
         props.changeFilter(filteredValue, props.todolistID)

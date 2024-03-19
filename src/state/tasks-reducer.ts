@@ -4,11 +4,6 @@ import {v1} from "uuid";
 import {addTodolistACType, removeTodolistACType} from "./todolists-reducer";
 
 
-// type ActionType = {
-//     type: string,
-//     [key: string]: any
-// }
-
 const initialState: TasksFortodolistType = {}
 export const tasksReducer = (state = initialState, action: TasksReducerType): TasksFortodolistType => {
     switch (action.type) {
