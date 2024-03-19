@@ -34,7 +34,7 @@ export const Todolist = (props: PropsType) => {
     }
     const addTask = useCallback((title: string) => {
         props.addTask(props.todolistID, title)
-    }, [])
+    }, [props.addTask, props.todolistID])
 
     const changeFilterTaskHandler = (filteredValue: FilterValueType) => {
         props.changeFilter(filteredValue, props.todolistID)
