@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css'
 import {FilterValueType} from "./App";
-import {ChangeEvent, useCallback} from "react";
+import {ChangeEvent, memo, useCallback} from "react";
 
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
@@ -28,7 +28,8 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
-export const Todolist = (props: PropsType) => {
+export const Todolist = memo((props: PropsType) => {
+    console.log('todolist called')
     const deleteTask = (taskId: string) => {
         props.removeTask(props.todolistID, taskId)
     }
@@ -104,4 +105,4 @@ export const Todolist = (props: PropsType) => {
             </div>
         </div>
     );
-};
+});
