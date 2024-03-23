@@ -1,12 +1,13 @@
 import * as React from 'react';
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, memo, useState} from "react";
 import {TextField} from "@mui/material";
 
 type EditableSpanProps = {
     oldTitle: string
     onClick: (newValue: string) => void
 };
-export const EditableSpan = ({oldTitle, onClick}: EditableSpanProps) => {
+export const EditableSpan = memo(({oldTitle, onClick}: EditableSpanProps) => {
+    console.log('editable span')
     const [editMode, setEditMode] = useState<boolean>(false)
 
     const [newTitle, setNewTitle] = useState(oldTitle)
@@ -37,4 +38,4 @@ export const EditableSpan = ({oldTitle, onClick}: EditableSpanProps) => {
             }
         </>
     );
-};
+});

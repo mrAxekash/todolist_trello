@@ -105,20 +105,20 @@ function App() {
                         }
                         return <Grid item>
                             <Paper style={{padding: '10px'}} elevation={3}>
-                                <Todolist
-                                    key={todolist.id}
-                                    todolistID={todolist.id}
-                                    title={todolist.title}
-                                    filter={todolist.filter}
-                                    tasks={tasksForTodolist}
-                                    removeTask={removeTask}
-                                    onChangeTaskTitle={changeTaskTitle}
-                                    changeFilter={changeFilter}
-                                    addTask={addTask}
-                                    changeTaskStatus={changeTaskStatus}
-                                    deleteTodolist={deleteTodolist}
-                                    changeTodolistTitle={changeTodolistTitle}
-                                />
+                                {/*<Todolist*/}
+                                {/*    key={todolist.id}*/}
+                                {/*    todolistID={todolist.id}*/}
+                                {/*    title={todolist.title}*/}
+                                {/*    filter={todolist.filter}*/}
+                                {/*    tasks={tasksForTodolist}*/}
+                                {/*    removeTask={removeTask}*/}
+                                {/*    onChangeTaskTitle={changeTaskTitle}*/}
+                                {/*    changeFilter={changeFilter}*/}
+                                {/*    addTask={addTask}*/}
+                                {/*    changeTaskStatus={changeTaskStatus}*/}
+                                {/*    deleteTodolist={deleteTodolist}*/}
+                                {/*    changeTodolistTitle={changeTodolistTitle}*/}
+                                {/*/>*/}
                             </Paper>
 
                             </Grid>})}

@@ -11,7 +11,6 @@ type Props = {
     addItem: (title:string) => void
 };
 export const AddItemForm = memo( (props: Props) => {
-    console.log('add item form')
     const [taskName, setTaskName] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
