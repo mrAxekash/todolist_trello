@@ -1,16 +1,14 @@
 import * as React from 'react';
-// import {Button} from "./Button";
-import {ChangeEvent, KeyboardEvent, memo, useCallback, useState} from "react";
-import Button from '@mui/material/Button';
+import {ChangeEvent, KeyboardEvent, memo, useState} from "react";
 import {TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {AddBox} from "@mui/icons-material";
 
 
-type Props = {
+export type AddItemFormType = {
     addItem: (title:string) => void
 };
-export const AddItemForm = memo( (props: Props) => {
+export const AddItemForm = memo( (props: AddItemFormType) => {
     const [taskName, setTaskName] = useState('')
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
