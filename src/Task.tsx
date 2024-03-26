@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import {Delete} from "@mui/icons-material";
 import {TaskType} from "./Todolist";
 
-type TaskPropsType = {
+export type TaskPropsType = {
     task: TaskType
     deleteTask: (taskID: string) => void
     changeTaskStatus: (taskId: string, newStatus: boolean) => void
@@ -14,7 +14,6 @@ type TaskPropsType = {
 };
 export const Task: FC<TaskPropsType> = memo(({task, deleteTask, changeTaskStatus, onChangeTaskTitle}) => {
 
-    console.log('Task')
     const onClickHandler = () => {
         deleteTask(task.id)
     }

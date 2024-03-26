@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 
-import { Button } from './Button';
-import {AddItemForm, AddItemFormType} from "../components/AddItemForm";
 import {action} from "@storybook/addon-actions"
-import {ChangeEvent, KeyboardEvent, useState} from "react";
-import {TextField} from "@mui/material";
+import {ChangeEvent, FC, memo, useCallback, useState} from "react";
 import IconButton from "@mui/material/IconButton";
-import {AddBox} from "@mui/icons-material";
+import {Delete} from "@mui/icons-material";
 import * as React from "react";
-import {Task} from "../Task";
+import {Task, TaskPropsType} from "../Task";
+import Checkbox from "@mui/material/Checkbox";
+import {EditableSpan} from "../components/EditableSpan";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Task> = {
@@ -31,15 +29,29 @@ const meta: Meta<typeof Task> = {
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { task: {id: '1', title: 'milk', isDone: true},
-    deleteTask: action('Delete task'),
-    onChangeTaskTitle: action('Change task title'),
-    changeTaskStatus: action('Change task status'), },
+    deleteTask: action('Delete task is done'),
+    // onChangeTaskTitle: action('Change task title'),
+    // changeTaskStatus: action('Change task status'),
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Task>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+
+const TaskToogle= () => {
+
+  const [task, setTask] = useState({id: '1', title: 'milk', isDone: true})
+
+  return <Task
+      task={task}
+      deleteTask={action('Task is deleted')}
+      changeTaskStatus={(taskId, newStatus) => setTask({...task, isDone: newStatus})}
+      onChangeTaskTitle={(taskID, newTitle) => setTask({...task, title: newTitle})}/>
+
+};
+
 export const TaskIsDoneStory: Story = {};
 export const TaskIsNotDoneStory: Story = {
   args: {
@@ -47,50 +59,6 @@ export const TaskIsNotDoneStory: Story = {
   }
 };
 
-// const AddItemFormError = React.memo((props: AddItemFormType) => {
-//   const [taskName, setTaskName] = useState('')
-//   const [errorMessage, setErrorMessage] = useState<string | null>('This field is required')
-//
-//   const addTask = () => {
-//     if(taskName.trim() !== '') {
-//       props.addItem(taskName.trim())
-//       setTaskName('')
-//     } else {
-//       setErrorMessage('This field is required')
-//     }
-//
-//   }
-//   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement> ) => {
-//     if(errorMessage) {
-//       setErrorMessage(null)
-//     }
-//     if(e.charCode === 13) {
-//       addTask()
-//     }
-//   }
-//   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-//     setTaskName(e.currentTarget.value)
-//   }
-//
-//
-//   return (
-//       <div>
-//           <TextField
-//               size={'small'}
-//   variant={'outlined'}
-//   value={taskName}
-//   onChange={onChangeHandler}
-//   onKeyDown={onKeyPressHandler}
-//   error={!!errorMessage}
-//   helperText={errorMessage}
-//   />
-//   <IconButton onClick={addTask} color={'primary'}>
-//       <AddBox/>
-//       </IconButton>
-//       </div>
-// );
-// })
-//
-// export const ErrorAddItemForm: Story = {
-//   render: () => <AddItemFormError addItem={action('Clicked button inside form')}/>
-// };
+export const ToogleTask: Story = {
+  render: () => <TaskToogle />
+}
